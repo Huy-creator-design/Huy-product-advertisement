@@ -1,1 +1,32 @@
-# Huy-product-advertisement
+("Tên sản phẩm")
+description = st.text_area("Mô tả ngắn")
+price = st.number_input("Giá bán (USD)", min_value=0)
+images = st.file_uploader("Tải lên ảnh sản phẩm (tối đa 3 ảnh)", type=["jpg", "png"], accept_multiple_files=True)
+
+# --- Gợi ý giá bán ---
+if product_name:
+    if "áo" in product_name.lower():
+        st.info("💡 Gợi ý: Giá áo thường từ $10 - $25")
+    elif "giày" in product_name.lower():
+        st.info("💡 Gợi ý: Giá giày thường từ $30 - $100")
+    elif "tranh" in product_name.lower():
+        st.info("💡 Gợi ý: Tranh nghệ thuật có thể từ $50 trở lên")
+
+# --- Hiển thị sản phẩm đã đăng ---
+if st.button("Đăng sản phẩm"):
+    if not product_name or not description:
+        st.warning("Vui lòng nhập đầy đủ thông tin sản phẩm.")
+    else:
+        st.success("🎉 Sản phẩm đã được đăng!")
+        st.subheader(product_name)
+        st.write(description)
+        st.write(f"💵 Giá bán: ${price}")
+        if images:
+            for img in images:
+                st.image(img, width=300)
+
+# --- Liên hệ hỗ trợ (Chatbot đơn giản) ---
+st.header("📩 Liên hệ hỗ trợ")
+question = st.text_input("Bạn muốn hỏi gì?")
+if question:
+    st.write("🤖 Bot: Cảm ơn bạn đã quan tâm! Vui lòng gọi anh qua số 📞 **123-456-7890** để biết thêm chi tiết.")
